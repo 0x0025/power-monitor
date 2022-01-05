@@ -9,27 +9,29 @@ float w1, w2, w3, v1, v2, v3, a1, a2, a3, wh1, wh2, wh3;
 
 bool power1, power2, power3 ;
 
-PZEM004Tv30 pzem1(2, 16);  // (RX,TX) connect to TX,RX of PZEM
-PZEM004Tv30 pzem2(12, 14); 
-PZEM004Tv30 pzem3(D3, D7); 
+PZEM004Tv30 pzem1(11, 12);  // (RX,TX) connect to TX,RX of PZEM
+PZEM004Tv30 pzem2(9, 10); 
+PZEM004Tv30 pzem3(7, 8); 
 
 void setup() {
   Serial.begin(115200);
-
-  pinMode(A0, OUTPUT); 
   
-  lcd.begin();
+  lcd.begin();   
   lcd.backlight();
   
   pzem1.setAddress(0x42);
   pzem2.setAddress(0x42);
   pzem3.setAddress(0x42);
-
 }
 
 void loop() {
   updatePzem();
-  Serial.println("pzem1: " + String(v1) + " v " + String(w1) + " w " + "pzem2: " + String(v2) + " v " + String(w2) + " w " + "pzem3: " + String(v3) + " v " + String(w3) + " w");
+  Serial.println(
+    String(v1)+";"+String(v2)+";"+String(v3)+";"+
+    String(a1)+";"+String(a2)+";"+String(a3)+";"+
+    String(w1)+";"+String(w2)+";"+String(w3)+";"+
+    String(wh1)+";"+String(wh2)+";"+String(wh3)+";"
+  );
   updateDisplay();
 }
 
